@@ -1,6 +1,12 @@
 package com.codeclan.md;
 
 public class Sheep extends Animal{
+	
+	public Sheep(int id){
+		super();
+		this.type = "sheep";
+		this.id = id;
+	}
 
 	@Override
 	public void eat(Food food) {

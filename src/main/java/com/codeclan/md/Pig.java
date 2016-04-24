@@ -2,6 +2,12 @@ package com.codeclan.md;
 
 public class Pig extends Animal{
 
+	public Pig(int id){
+		super();
+		this.type = "pig";
+		this.id = id;
+	}
+	
 	@Override
 	public void eat(Food food) {
 		double energyGained = food.getEnergy() / 2;
