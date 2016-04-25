@@ -73,7 +73,7 @@ public class TestFarm {
 	//I am getting the correct object back but want to compare them.
 	
 	@Test
-	public void testCanFindAnimalForGivenId(){
+	public void testCanFindAnimalForGivenId() throws AnimalNotFoundException{
 		Farm farm = new Farm();
 		Animal cow = new Cow(1);
 		Animal sheep = new Sheep(2);
@@ -87,7 +87,7 @@ public class TestFarm {
 	}
 	
 	@Test
-	public void testFindAnimalDoesNotRemoveAnimalFromFarm(){
+	public void testFindAnimalDoesNotRemoveAnimalFromFarm() throws AnimalNotFoundException{
 		Farm farm = new Farm();
 		Animal cow = new Cow(1);
 		Animal sheep = new Sheep(2);
@@ -97,6 +97,25 @@ public class TestFarm {
 		farm.addAnimal(sheep);
 		Animal foundAnimal = farm.findAnimalWithId(2); 
 		assertTrue(2==farm.getField().size());
+	}
+	
+	@Test (expected = AnimalNotFoundException.class)
+	public void testThrowsExceptionIfAnimalIdIsNotFound() throws AnimalNotFoundException{
+		Farm farm = new Farm();
+		Animal cow = new Cow(1);
+		Animal sheep = new Sheep(2);
+		sheep.setWeight(56.45);
+		sheep.setPrice();
+		farm.addAnimal(cow);
+		farm.addAnimal(sheep);
+		
+		try {
+			farm.findAnimalWithId(3);
+			fail("Exception was not thrown");
+		} catch(AnimalNotFoundException e) {
+			System.err.println(e.getMessage());
+			throw new AnimalNotFoundException();		
+		}
 	}
 	
 	@Test
@@ -138,5 +157,63 @@ public class TestFarm {
 		assertTrue(1 == foundAnimals.size());
 		
 	}
+	
+//	@Test
+//	public void testCanRemoveAnimalFromFarmForGivenId() throws AnimalNotFoundException{
+//		Farm farm = new Farm();
+//		Animal cow = new Cow(1);
+//		Animal sheep = new Sheep(2);
+//		Animal cowTwo = new Cow(3);
+//		cow.setWeight(350.56);
+//		cow.setPrice();
+//		sheep.setWeight(56.45);
+//		sheep.setPrice();
+//		cowTwo.setWeight(348.00);
+//		cowTwo.setPrice();
+//		farm.addAnimal(cow);
+//		farm.addAnimal(sheep);
+//		farm.addAnimal(cowTwo);
+//		farm.removeAnimalWithId(1);
+//		assertTrue(2 == farm.getField().size());
+//	}
+//	
+//	@Test (expected = AnimalNotFoundException.class)
+//	public void testExceptionISThrownIfAnimalIdDoesNotExist() throws AnimalNotFoundException{
+//		Farm farm = new Farm();
+//		Animal cow = new Cow(1);
+//		Animal sheep = new Sheep(2);
+//		Animal cowTwo = new Cow(3);
+//		cow.setWeight(350.56);
+//		cow.setPrice();
+//		sheep.setWeight(56.45);
+//		sheep.setPrice();
+//		cowTwo.setWeight(348.00);
+//		cowTwo.setPrice();
+//		farm.addAnimal(cow);
+//		farm.addAnimal(sheep);
+//		farm.addAnimal(cowTwo);
+//		
+//		try {
+//			farm.removeAnimalWithId(4);
+//			fail("Exception was not thrown");
+//		} catch(AnimalNotFoundException e) {
+//			System.err.println(e.getMessage());
+//			throw new AnimalNotFoundException();
+//			
+//		}
+//		
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

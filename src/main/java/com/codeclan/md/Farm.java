@@ -27,20 +27,22 @@ public class Farm {
 		if (field.add(liveStock)){
 			return true;
 		} else {
+			
 			return false;
 		}
 		
 	}
 	
-	public Animal findAnimalWithId(int id){
+	public Animal findAnimalWithId(int id) throws AnimalNotFoundException{
 	 
-		ArrayList<Animal> result = new ArrayList<Animal>();
+//		ArrayList<Animal> result = new ArrayList<Animal>();
 		for(Animal livestock : field){
 			if(livestock.getId()==id){
-				result.add(livestock);
+				return livestock;
 			}
 		}
-		return result.get(0);
+		throw new AnimalNotFoundException();
+//		return result.get(0);
 	}
 	
 	public ArrayList findAnimalsOfType(String type){
@@ -52,4 +54,21 @@ public class Farm {
 		}
 		return result;
 	}
+	
+//	public boolean removeAnimalWithId(int id) throws AnimalNotFoundException{
+//		Animal livestock = this.findAnimalWithId(id);
+//		
+//		
+//		
+//	}
 }
+
+
+
+
+
+
+
+
+
+
